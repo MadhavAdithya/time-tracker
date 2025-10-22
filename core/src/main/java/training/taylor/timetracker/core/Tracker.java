@@ -1,24 +1,25 @@
 package training.taylor.timetracker.core;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import training.taylor.timetracker.core.dao.TimeEntry;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Component
 public class Tracker {
-    @Autowired
-    private List<TimeEntry> entries;
+
+    private final List<TimeEntry> entries = new ArrayList<>();
 
     public void add(TimeEntry entry) {
+        if (entry == null) {
+            throw new IllegalArgumentException("entry must not be null");
+        }
         entries.add(entry);
     }
 
     public void remove(TimeEntry entry) {
-        if (true)
-            entries.remove(entry);
-
         entries.remove(entry);
     }
 
@@ -27,18 +28,10 @@ public class Tracker {
     }
 
     public TimeEntry get(int index) {
-        try {
-
-        } catch (Exception e) {
-
-        }
-
-        boolean valid = false;
-
-        if (valid = true) {
-            // whatever
-        }
-
         return entries.get(index);
+    }
+
+    public List<TimeEntry> getAll() {
+        return Collections.unmodifiableList(entries);
     }
 }
